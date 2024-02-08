@@ -5,12 +5,19 @@ import java.util.List;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.licascarvalho.cursospringhiber.domain.Cliente;
 import com.licascarvalho.cursospringhiber.domain.enums.TipoCliente;
 import com.licascarvalho.cursospringhiber.dto.ClienteNewDTO;
+import com.licascarvalho.cursospringhiber.repositories.ClienteRepository;
 import com.licascarvalho.cursospringhiber.resources.exception.FieldMessage;
 import com.licascarvalho.cursospringhiber.services.validation.utils.BR;
 
 public class ClienteInsertValidator implements ConstraintValidator<ClienteInsert, ClienteNewDTO> {
+	
+	@Autowired
+	private ClienteRepository repo;
 	//O initialize funciona semelhante ao Awake da unity, 
 	//o que eu codificar dentro vai fazer no momento que for instanciado o objeto/função
 	@Override
@@ -29,6 +36,12 @@ public class ClienteInsertValidator implements ConstraintValidator<ClienteInsert
 		if(objDto.getTipo().equals(TipoCliente.PESSOAJURIDICA.getCod()) && !BR.isValidCNPJ(objDto.getCpfOuCnpj())) {
 			list.add(new FieldMessage("cpfOuCnpj", "CNPJ inválido"));
 		}
+		
+		Cliente aux = repo.findByEmail(objDto.getEmail());
+		if(aux != null) {
+			list.add(new FieldMessage("email", "Email já existente"));
+		}
+		
 		
 		for (FieldMessage e : list) {
 			context.disableDefaultConstraintViolation();
