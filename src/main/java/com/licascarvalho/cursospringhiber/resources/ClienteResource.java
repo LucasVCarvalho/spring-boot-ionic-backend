@@ -23,6 +23,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.licascarvalho.cursospringhiber.domain.Cliente;
 import com.licascarvalho.cursospringhiber.dto.ClienteDTO;
+import com.licascarvalho.cursospringhiber.dto.ClienteNewDTO;
 import com.licascarvalho.cursospringhiber.services.ClienteService;
 
 @RestController
@@ -61,7 +62,7 @@ public class ClienteResource {
 	
 	//void porquê quando for um sucesso é pra retornar nada
 	@PostMapping
-	public ResponseEntity<Void> insert(@Valid @RequestBody ClienteDTO objDto){
+	public ResponseEntity<Void> insert(@Valid @RequestBody ClienteNewDTO objDto) {
 		Cliente obj = service.fromDTO(objDto);
 		obj = service.insert(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
@@ -70,7 +71,7 @@ public class ClienteResource {
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<Void> update(@Valid @RequestBody ClienteDTO objDto, @PathVariable Integer id){
+	public ResponseEntity<Void> update(@Valid @RequestBody ClienteNewDTO objDto, @PathVariable Integer id){
 		Cliente obj = service.fromDTO(objDto);
 		obj.setId(id);
 		obj = service.update(obj);
