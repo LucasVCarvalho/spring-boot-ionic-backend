@@ -49,6 +49,7 @@ public class ClienteResource {
 	
 	//Exemplo de como vai funcionar a chamada /categorias/page?page=0&linesPerPage=24
 	//Recomenda linesPerPage=24 porquê é um numero multiplo de 1,2,3 e 4
+	//check 1 dos casos de uso do pdf 03-operacoes-de-CRUD-e-casos-de-uso.pdf do curso spring-ionic
 	@GetMapping("/page")
 	public ResponseEntity<Page<ClienteDTO>> findPage(
 			@RequestParam(value="page", defaultValue="0") Integer page, 
