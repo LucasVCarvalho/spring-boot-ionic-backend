@@ -15,6 +15,7 @@ import com.licascarvalho.cursospringhiber.domain.Cidade;
 import com.licascarvalho.cursospringhiber.domain.Cliente;
 import com.licascarvalho.cursospringhiber.domain.Endereco;
 import com.licascarvalho.cursospringhiber.domain.enums.TipoCliente;
+import com.licascarvalho.cursospringhiber.dto.ClienteDTO;
 import com.licascarvalho.cursospringhiber.dto.ClienteNewDTO;
 import com.licascarvalho.cursospringhiber.repositories.ClienteRepository;
 import com.licascarvalho.cursospringhiber.repositories.EnderecoRepository;
@@ -47,7 +48,7 @@ public class ClienteService {
 	public Cliente update(Cliente obj) {
 		Cliente newObj = find(obj.getId());
 		updateData(newObj, obj);
-		return newObj;
+		return repo.save(newObj);
 	}
 
 
@@ -69,6 +70,11 @@ public class ClienteService {
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
 		return repo.findAll(pageRequest);
 	}
+	
+	public Cliente fromDTO(ClienteDTO objDto) {
+		return new Cliente(objDto.getId(), objDto.getNome(), objDto.getEmail(), null, null);
+	}
+	
 	//throw new UnsupportedOperationException() pq não foi desenvolvido ainda
 	public Cliente fromDTO(ClienteNewDTO objDto) {
 		Cliente cli = new Cliente(null, objDto.getNome(), objDto.getEmail(), objDto.getCpfOuCnpj(), TipoCliente.toEnum(objDto.getTipo()));

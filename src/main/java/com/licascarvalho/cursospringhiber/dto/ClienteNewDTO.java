@@ -9,7 +9,7 @@ import org.hibernate.validator.constraints.Length;
 
 import com.licascarvalho.cursospringhiber.services.validation.ClienteInsert;
 
-//Anotação customizada feita nas classes ClienteInsert/ClienteInsertValidator pra validar os campos:
+//Anotação personalizada feita nas classes ClienteInsert/ClienteInsertValidator pra validar os campos:
 //cpfoucnpj e email
 @ClienteInsert
 public class ClienteNewDTO implements Serializable {
