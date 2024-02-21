@@ -1,5 +1,6 @@
 package com.licascarvalho.cursospringhiber.services;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 
@@ -59,7 +60,7 @@ public class DBService {
 	@Autowired
 	private ItemPedidoRepository itemPedidoRepository;
 	
-	public void instantiateTestDatabase() throws Exception {
+	public void instantiateTestDatabase() throws ParseException {
 		
 		Categoria cat1 = new Categoria(null, "Informática");
 		Categoria cat2 = new Categoria(null, "Escritório");
@@ -68,6 +69,7 @@ public class DBService {
 		Categoria cat5 = new Categoria(null, "Jardinagem");
 		Categoria cat6 = new Categoria(null, "Decoração");
 		Categoria cat7 = new Categoria(null, "Perfumaria");
+
 		
 		Produto p1 = new Produto(null, "Computador", 2000.00);
 		Produto p2 = new Produto(null, "Impressora", 800.00);
